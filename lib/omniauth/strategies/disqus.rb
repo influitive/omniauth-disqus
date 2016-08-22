@@ -36,6 +36,12 @@ module OmniAuth
 
         @raw_info ||= access_token.get(url, :params => params).parsed['response']
       end
+
+      private
+
+      def callback_url
+        options[:callback_url] || (full_host + script_name + callback_path)
+      end
     end
   end
 end
