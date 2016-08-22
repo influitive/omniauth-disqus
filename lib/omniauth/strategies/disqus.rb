@@ -26,15 +26,15 @@ module OmniAuth
       extra do
         { :raw_info => raw_info }
       end
-      
+
       def raw_info
-        begin
-          res = HTTParty.get("http://disqus.com/api/3.0/users/details.json?api_key=#{access_token.client.id}&user=#{access_token.params['user_id']}")
-        rescue => e
-          e # what should be done with this?
-        end
-        res = Hashie::Mash.new(res.to_hash['response'])
-        @raw_info ||= res
+        url    = '/api/3.0/users/details.json'
+        params = {
+          'api_key'      => access_token.client.id,
+          'access_token' => access_token.token
+        }
+
+        @raw_info ||= access_token.get(url, :params => params).parsed['response']
       end
     end
   end

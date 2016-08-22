@@ -9,7 +9,6 @@ Gem::Specification.new do |gem|
   gem.homepage      = ""
 
   gem.add_runtime_dependency     'omniauth-oauth2'
-  gem.add_runtime_dependency     'httparty'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
